@@ -13,10 +13,18 @@ module.exports = (app) => {
         return res.redirect(`/`);
       })
     });
+    
+    Post.find({})
+    .then(posts => {1
+      res.render("posts-index", { posts });
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
   
   };
 
-  
+
 // module.exports = app => {
 //     // CREATE
 //     app.post("/posts/new", (req, res) => {
