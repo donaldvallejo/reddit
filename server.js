@@ -26,4 +26,5 @@ res.render("posts-new")
 // app.get('/', (req, res) => res.render('posts-index'))
 app.get('/post/new', (req, res) => res.render('posts-new'))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
 module.exports = app;
