@@ -1,33 +1,29 @@
-const express = require('express');
+// var port = process.env.PORT || 3000; app.listen(port, function() { console.log("Listening on " + port); });
+
+const express = require('express')
+const app = express()
+const port = 3000
+const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
-
-// App Setup
-const app = express();
-
-// Middleware
-const exphbs  = require('express-handlebars');
-
-// set db
-require('./data/reddit-db');
-
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-app.use(express.static('public'));
+// Use Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+// Add after body parser initialization!
 app.use(expressValidator());
-
-require('./controllers/posts.js')(app);
-
-// Routes
-app.get('/', (req, res) => {
-    res.render("home", {});
-});
-
-app.get('/posts/new', (req, res) => {
+require('./controllers/posts')(app);
+require('./data/reddit-db');
+app.get('/post/new', (req, res) => {
 res.render("posts-new")
 });
 
-var port = process.env.PORT || 3000; app.listen(port, function() { console.log("Listening on " + port); });
+// app.get('/', (req, res) => res.render('posts-index'))
+app.get('/post/new', (req, res) => res.render('posts-new'))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+module.exports = app;
