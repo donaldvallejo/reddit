@@ -4,7 +4,9 @@
             {{#each posts}}
             <li class="list-group-item">
                 <div class="lead">{{this.title}}</div>
+                <p>{{this.summary}}</p>
                     <a href="{{this.url}}" target="_blank">{{this.url}}</a>
+                    
                 <div class="text-right">
                     <a href="/n/{{this.subreddit}}">{{this.subreddit}}</a>
                 </div>

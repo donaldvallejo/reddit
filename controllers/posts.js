@@ -21,7 +21,7 @@ module.exports = (app) => {
       Post.find({})
       .then(posts => {
         console.log(posts)
-        res.render("posts-index", { posts:posts });
+        return res.render("posts-index", { posts:posts });
       })
       .catch(err => {
         console.log(err.message);
